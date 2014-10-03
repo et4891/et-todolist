@@ -1,22 +1,13 @@
-<?php 
-require_once 'app/init.php';
-
-$itemsQuery = $db->prepare("
-		SELECT id, todoText, done
-		FROM phptodolist_items
-		WHERE user = :user
-	");
-
-//use array() instead of [] if error happens in servers
-$itemsQuery->execute(array(
-		'user' => $_SESSION['user_id']
-	));
-
-//use array() instead of [] if error happens in servers
-$items = $itemsQuery->rowCount() ? $itemsQuery : array();
-
+<?php
+session_start();
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60))
+{
+    // last request was more than 1 minute ago
+    session_unset();     // unset $_SESSION variable for the run-time 
+    session_destroy();   // destroy session data in storage
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,8 +23,34 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : array();
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<?php
+require_once 'app/init.php';
+?>
+
+<?php if(!isset($_SESSION['password'])): ?>
+
+	<p>Please enter your password first at <a href="<?php echo 'login-form.php'; ?>">Login Form</a></p>
+	<?php die(); ?>
+
+<?php endif ?>
+
+<?php
+$itemsQuery = $db->prepare("
+		SELECT id, todoText, done
+		FROM ET_TodoList
+		WHERE user = :user
+	");
+
+//use array() instead of [] if error happens in servers
+$itemsQuery->execute(array(
+		'user' => $_SESSION['user_id']
+	));
+
+//use array() instead of [] if error happens in servers
+$items = $itemsQuery->rowCount() ? $itemsQuery : array();
+?>
 	<div class="list">
-		<h1 class="header">To do lists.</h1>
+		<h1 class="header">ET's To do lists.</h1>
 
 		<?php if(!empty($items)): ?>
 			<ul class="items">

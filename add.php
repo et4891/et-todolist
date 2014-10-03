@@ -4,12 +4,12 @@ require_once 'app/init.php';
 
 if (isset($_POST['todoText']))
 {
-	$todoText = trim($_POST['todoText']);
+	$todoText = htmlentities(trim($_POST['todoText']), ENT_QUOTES);
 
 	if (!empty($todoText))
 	{
 		$addedQuery = $db->prepare("
-				INSERT INTO phptodolist_items (todoText, user, done, created)
+				INSERT INTO ET_TodoList (todoText, user, done, created)
 				VALUES (:todoText, :user, 0, NOW())
 			");
 
