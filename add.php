@@ -8,8 +8,13 @@ if (isset($_POST['todoText']))
 
 	if (!empty($todoText))
 	{
-		$addedQuery = $db->prepare("
-				INSERT INTO ET_TodoList (todoText, user, done, created)
+//		$addedQuery = $db->prepare("
+//				INSERT INTO ET_TodoList (todoText, user, done, created)
+//				VALUES (:todoText, :user, 0, NOW())
+//			");
+
+        $addedQuery = $db->prepare("
+				INSERT INTO phptodolist_items (todoText, user, done, created)
 				VALUES (:todoText, :user, 0, NOW())
 			");
 

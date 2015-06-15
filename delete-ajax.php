@@ -32,5 +32,3 @@ if (isset($_GET['as'], $_GET['item']))
 			break;
 	}
 }
-
-header('Location: index.php');

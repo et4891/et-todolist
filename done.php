@@ -12,8 +12,15 @@ if (isset($_GET['as'], $_GET['item']))
 	// switch is the same as if statement
 	switch ($as) {
 		case 'done':
+//            $doneQuery = $db->prepare("
+//					UPDATE ET_TodoList
+//					SET done = 1
+//					WHERE id = :item
+//					AND user = :user
+//				");
+
 			$doneQuery = $db->prepare("
-					UPDATE ET_TodoList
+					UPDATE phptodolist_items
 					SET done = 1
 					WHERE id = :item
 					AND user = :user
