@@ -5,7 +5,11 @@ $(document).ready(function() {
 
     //Action when submit is clicked
     //e is an event object to get the preventDefault() method which is used to prevent the default action of the element
-    //$('.submit').click(function(e){
+    //$('.item-add').on('click', '.submit', function(e)
+    //Had a problem that the ajax wouldn't work property refreshes and found out the problem is because of binding. and someone gave me the commet from below.
+
+    //You are binding your event handlers when the page opens / the DOM is ready, on $(document).ready(). Then you add new items using ajax but the links in these items will not have your event handlers bound to them.
+    //You can use event delegation to make sure that the events are also automatically bound to newly added items.
     $('.item-add').on('click', '.submit', function(e){
         var todoText = $("input[name='todoText']").val();
         e.preventDefault();
@@ -27,6 +31,9 @@ $(document).ready(function() {
     });
 
     //Action when done button is clicked
+    //where the $("ul.item") can be any element that contains the newly added elements and that is on the page when this code executes.
+    //This applies to all event handlers that you want to bind to elements that are not yet on the page when the DOM is ready.
+    //Which means do not use $('li') use it's parent or further using ('.list') would work too
     $('ul.items').on('click', '.done-button', function(e){
         e.preventDefault();
 
