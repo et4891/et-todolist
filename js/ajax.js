@@ -6,7 +6,7 @@ $(document).ready(function() {
     //Action when submit is clicked
     //e is an event object to get the preventDefault() method which is used to prevent the default action of the element
     //$('.submit').click(function(e){
-    $('body').on('.submit', function(e){
+    $('.item-add').on('click', '.submit', function(e){
         var todoText = $("input[name='todoText']").val();
         e.preventDefault();
 
@@ -27,7 +27,7 @@ $(document).ready(function() {
     });
 
     //Action when done button is clicked
-    $('li').on('click', '.done-button', function(e){
+    $('ul.items').on('click', '.done-button', function(e){
         e.preventDefault();
 
         //making sure only work with the current element
@@ -55,7 +55,7 @@ $(document).ready(function() {
     });
 
     //Action when delete button is clicked
-    $('li').on('click', '.delete-button', function(e){
+    $('ul.items').on('click', '.delete-button', function(e){
         e.preventDefault();
 
         //making sure only work with the current element
