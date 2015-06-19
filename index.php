@@ -27,23 +27,17 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 require_once 'app/init.php';
 ?>
 
-<?php //if(!isset($_SESSION['password'])): ?>
-<!---->
-<!--	<p>Please enter your password first at <a href="--><?php //echo 'login-form.php'; ?><!--">Login Form</a></p>-->
-<!--	--><?php //die(); ?>
-<!---->
-<?php //endif ?>
+<?php if(!isset($_SESSION['password'])): ?>
+
+	<p>Please enter your password first at <a href="<?php echo 'login-form.php'; ?>">Login Form</a></p>
+	<?php die(); ?>
+
+<?php endif ?>
 
 <?php
-//$itemsQuery = $db->prepare("
-//		SELECT id, todoText, done
-//		FROM ET_TodoList
-//		WHERE user = :user
-//	");
-
 $itemsQuery = $db->prepare("
 		SELECT id, todoText, done
-		FROM phptodolist_items
+		FROM ET_TodoList
 		WHERE user = :user
 	");
 
@@ -69,8 +63,8 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : array();
 							<a href="delete-ajax.php?as=delete&item=<?php echo $item['id']; ?>" class="delete-button">Delete Task</a>
 						<?php endif; ?>	
 						<?php if(!$item['done']): ?>
-							<!-- the as=done here means as is an action which is used in done.php  -->
-							<!-- if as is done then a query will happen in done.php -->
+							<!-- the as=done here means as is an action which is used in done-ajax.php  -->
+							<!-- if as is done then a query will happen in done-ajax.php -->
 							<!-- &item equals the item id in order to change the class -->
 							<a href="done-ajax.php?as=done&item=<?php echo $item['id']; ?>" class="done-button">Mark as done</a>
 						<?php endif; ?>
@@ -82,8 +76,8 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : array();
             <ul class="items"></ul>
 		<?php endif ?>
 
-		<form class="item-add" action="add.php" method="post">
-			<input type="text" name="todoText" placeholder="Type a new item here." class="input" autocomplete="off" required>
+		<form class="item-add" action="add-ajax.php" method="post">
+			<input type="text" name="todoText" placeholder="     Type a new item here." class="input" autocomplete="off" required>
 			<input type="submit" value="Add" class="submit">
 		</form>
 	</div>

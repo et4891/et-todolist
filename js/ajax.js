@@ -24,8 +24,8 @@ $(document).ready(function() {
             .done(function(data){
                 $('p.empty').empty();
                 $('input.input').val('');
-                $('ul.items').append('<li>'+todoText+' '+
-                '<a href="done-ajax.php?as=done&item=' + data.id +
+                $('ul.items').append('<li><span>'+todoText+' '+
+                '</span><a href="done-ajax.php?as=done&item=' + data.id +
                 '" class="done-button">Mark as Done</a></li>');
             })
     });
@@ -53,7 +53,7 @@ $(document).ready(function() {
             url: "done-ajax.php"
         })
             .done(function(){
-                $clicked.prev().addClass('done');
+                $clicked.prev().addClass('item done');
                 $clicked.removeClass('done-button').empty();
                 $clicked.addClass('delete-button').text('Delete Task');
                 $clicked.removeAttr('href');

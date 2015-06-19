@@ -12,14 +12,8 @@ if (isset($_GET['as'], $_GET['item']))
 	// switch is the same as if statement
 	switch ($as) {
 		case 'delete':
-//			$doneQuery = $db->prepare("
-//					DELETE FROM ET_TodoList
-//					WHERE id = :item
-//					AND user = :user
-//				");
-
 			$doneQuery = $db->prepare("
-					DELETE FROM phptodolist_items
+					DELETE FROM ET_TodoList
 					WHERE id = :item
 					AND user = :user
 				");

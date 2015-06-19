@@ -6,7 +6,7 @@ $_SESSION['password'] = $_POST['password'];
 /*Inserts*/
 // $password = password_hash('todo', PASSWORD_BCRYPT, array('cost' => 10));
 // $username = 'ET';
-
+//
 // $insertQuery = $db->prepare("
 // 		INSERT INTO et_todo (username, password)
 // 		VALUES (:username, :password)
